@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "equipments",
+  "info": {
+    "singularName": "equipment",
+    "pluralName": "equipments",
+    "displayName": "Equipment"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "equipment_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::equipment-type.equipment-type"
+    },
+    "sn": {
+      "type": "string",
+      "required": true
+    },
+    "note": {
+      "type": "text"
+    }
+  }
+}

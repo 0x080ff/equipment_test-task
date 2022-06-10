@@ -1,0 +1,29 @@
+version: "3"
+
+networks:
+  equipment:
+
+services:
+  equipment-service:
+    build:
+      context: ./equipment-service
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - NODE_ENV=production
+    ports:
+      - 1337:1337
+    networks:
+      - equipment
+
+  equipment-frontend:
+    build:
+      context: ./equipment-frontend
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=production
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - equipment

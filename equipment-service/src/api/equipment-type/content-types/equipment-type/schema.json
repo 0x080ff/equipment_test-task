@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "equipment_types",
+  "info": {
+    "singularName": "equipment-type",
+    "pluralName": "equipment-types",
+    "displayName": "Equipment type",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "mask": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
