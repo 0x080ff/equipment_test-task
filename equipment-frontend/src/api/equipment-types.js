@@ -1,45 +1,41 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const fetchEquipmentTypes = async () => { 
-  return await axios({
+const fetchEquipmentTypes = async () => {
+  const response = await axios({
     method: 'get',
     url: 'http://localhost:1337/api/equipment-types',
   });
-}
 
-const createEquipmentType = async (data) => { 
+  return response.data;
+};
+
+const createEquipmentType = async data => {
   return await axios({
     method: 'post',
     url: 'http://localhost:1337/api/equipment-types',
     data: {
-      data: { ...data }
-    }
+      data: { ...data },
+    },
   });
-}
+};
 
-const updateEquipmentType = async (data) => { 
-  const { id, ...itemData } = data
-  
+const updateEquipmentType = async data => {
+  const { id, ...itemData } = data;
+
   return await axios({
     method: 'put',
     url: `http://localhost:1337/api/equipment-types/${id}`,
     data: {
-      data: itemData
-    }
+      data: itemData,
+    },
   });
-}
+};
 
-const deleteEquipmentType = async (id) => { 
+const deleteEquipmentType = async id => {
   return await axios({
     method: 'delete',
-    url: `http://localhost:1337/api/equipment-types/${id}`
+    url: `http://localhost:1337/api/equipment-types/${id}`,
   });
-}
+};
 
-
-export {
-  fetchEquipmentTypes,
-  createEquipmentType,
-  updateEquipmentType,
-  deleteEquipmentType
-}
+export { fetchEquipmentTypes, createEquipmentType, updateEquipmentType, deleteEquipmentType };

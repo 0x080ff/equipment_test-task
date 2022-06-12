@@ -15,29 +15,29 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { useEquipmentStore } from '@/stores/equipmentStore'
+import { ref } from 'vue';
+import { useEquipmentStore } from '@/stores/equipmentStore';
 
 export default {
   setup() {
-    const { searchBySNAndNoteEquipment } = useEquipmentStore()
+    const { searchBySNAndNoteEquipment } = useEquipmentStore();
 
-    const searchInput = ref('')
-    const loading = ref(false)
+    const searchInput = ref('');
+    const loading = ref(false);
 
-    const search = (query) => {
-      loading.value = true
-      setTimeout( () => {
-        searchBySNAndNoteEquipment(query)
-        loading.value = false
-      }, 1000)
-    }
+    const search = query => {
+      loading.value = true;
+      setTimeout(() => {
+        searchBySNAndNoteEquipment(query);
+        loading.value = false;
+      }, 1000);
+    };
 
     return {
       searchInput,
       loading,
-      search
-    }
+      search,
+    };
   },
-}
+};
 </script>

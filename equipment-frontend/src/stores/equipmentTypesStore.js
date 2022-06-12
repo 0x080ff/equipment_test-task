@@ -1,50 +1,69 @@
-import { defineStore } from 'pinia'
-import {
-  fetchEquipmentTypes,
-  createEquipmentType,
-  updateEquipmentType,
-  deleteEquipmentType
-} from '@/api/equipment-types'
+import { defineStore } from 'pinia';
+import { fetchEquipmentTypes, createEquipmentType, updateEquipmentType, deleteEquipmentType } from '@/api/equipment-types';
+
+import { useMainStore } from '@/stores/mainStore';
 
 export const useEquipmentTypesStore = defineStore('equipmentTypesStore', {
   state: () => {
+    const { setSnackbar } = useMainStore();
+
     return {
-      types: []
-    }
+      types: [],
+      setSnackbar,
+    };
   },
 
   actions: {
     async getAllEquipmentTypes() {
       try {
-        const { data } = await fetchEquipmentTypes()
-        this.types = data.data
+        const { data } = await fetchEquipmentTypes();
+        this.types = data;
       } catch (error) {
-        console.error(error);
+        this.setSnackbar({ state: true, text: 'An error has occurred', color: 'red' });
+        throw error;
       }
     },
 
-    async addEquipmentType(data) { 
+    async addEquipmentType(data) {
+      let response;
+
       try {
-        return await createEquipmentType(data)
+        response = await createEquipmentType(data);
       } catch (error) {
-        console.error(error);
+        this.setSnackbar({ state: true, text: 'An error has occurred', color: 'red' });
+        throw error;
       }
+
+      this.setSnackbar({ state: true, text: 'The equipment type has been successfully added', color: 'green' });
+      return response;
     },
 
-    async editEquipmentType(data) { 
+    async editEquipmentType(data) {
+      let response;
+
       try {
-        return await updateEquipmentType(data)
+        response = await updateEquipmentType(data);
       } catch (error) {
-        console.error(error);
+        this.setSnackbar({ state: true, text: 'An error has occurred', color: 'red' });
+        throw error;
       }
+
+      this.setSnackbar({ state: true, text: 'The equipment type has been successfully edited', color: 'green' });
+      return response;
     },
 
-    async removeEquipmentType(id) { 
+    async removeEquipmentType(id) {
+      let response;
+
       try {
-        return await deleteEquipmentType(id)
+        response = await deleteEquipmentType(id);
       } catch (error) {
-        console.error(error);
+        this.setSnackbar({ state: true, text: 'An error has occurred', color: 'red' });
+        throw error;
       }
+
+      this.setSnackbar({ state: true, text: 'The equipment type has been successfully removed', color: 'green' });
+      return response;
     },
   },
-})
+});
